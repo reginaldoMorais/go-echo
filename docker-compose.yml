@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  mongodb:
+    image: mongo:latest
+    restart: always
+    container_name: "go-echo-mongo"
+    ports:
+      - "27017:27017"

@@ -1,0 +1,40 @@
+{
+  "cSpell.words": [
+    "bson",
+    "github",
+    "godotenv",
+    "golangci",
+    "Golangci",
+    "GOPATH",
+    "Infof",
+    "labstack",
+    "mongodb",
+    "Warnf"
+  ],
+  "editor.rulers": [160, 180],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#74fffd",
+    "activityBar.background": "#74fffd",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#fd60ff",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#74fffd",
+    "statusBar.background": "#41fffc",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#0efffb",
+    "statusBarItem.remoteBackground": "#41fffc",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#41fffc",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#41fffc99",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#41fffc",
+  "peacock.remoteColor": "#41fffc"
+}
