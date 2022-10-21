@@ -2,7 +2,7 @@ package printer
 
 import (
 	"fmt"
-	"go-echo/color"
+	"go-echo/pkg/color"
 	"time"
 )
 

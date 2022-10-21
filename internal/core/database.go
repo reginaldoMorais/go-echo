@@ -1,9 +1,9 @@
-package configs
+package core
 
 import (
 	"context"
 	"fmt"
-	"go-echo/color"
+	"go-echo/pkg/color"
 	"log"
 	"time"
 

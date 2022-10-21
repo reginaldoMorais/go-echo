@@ -1,8 +1,8 @@
 package main
 
 import (
-	"go-echo/configs"
-	"go-echo/routes"
+	"go-echo/internal/api/routes"
+	"go-echo/internal/core"
 
 	"github.com/labstack/echo"
 )
@@ -10,7 +10,7 @@ import (
 func main() {
 	e := echo.New()
 
-	configs.ConnectDB()
+	core.ConnectDB()
 
 	routes.UserRoute(e)
 

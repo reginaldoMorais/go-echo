@@ -7,13 +7,13 @@ live-reload:
 
 start-dev:
 	bash ./development-startup.sh 
-	go run server.go
+	go run cmd/go-echo/server.go
 
 start-stg:
-	go run server.go --env staging
+	go run cmd/go-echo/server.go --env staging
 
 start-prd:
-	go run server.go --env production
+	go run cmd/go-echo/server.go --env production
 
 test:
 	echo `go test -v ./...`
@@ -22,4 +22,7 @@ lint:
 	golangci-lint run
 
 build:
-	go build -v -o server server.go
+	go build -v -o server cmd/go-echo/server.go
+
+air:
+	go build -o ./tmp/main ./cmd/go-echo/server.go

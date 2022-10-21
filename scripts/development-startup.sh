@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./developments/docker-compose up -d
+docker-compose up -d
 
 echo "Starting docker-compose..."
 
