@@ -2,11 +2,10 @@ package services
 
 import (
 	"go-echo/internal/api/responses"
-
-	"github.com/labstack/echo"
+	"go-echo/internal/domain/models"
 )
 
 type IClientService interface {
-	CreateClient(c echo.Context) (responses.ClientResponse, responses.ClientErrorResponse)
+	CreateClient(client models.Client) (responses.ClientResponse, responses.ClientErrorResponse)
 	GetClientById(clientId string) (responses.ClientResponse, responses.ClientErrorResponse)
 }
