@@ -21,6 +21,29 @@ func NewClientRepository() repositories.IClientRepository {
 	return &ClientRepository{collection}
 }
 
+func (r *ClientRepository) FindAll() ([]models.Client, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+
+	cursor, err := r.Collection.Find(ctx, bson.D{{}})
+
+	var clients []models.Client
+
+	for cursor.Next(context.TODO()) {
+		var elem models.Client
+
+		err := cursor.Decode(&elem)
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		clients = append(clients, elem)
+
+	}
+
+	return clients, err
+}
+
 func (r *ClientRepository) FindById(id string) (models.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
@@ -35,9 +58,20 @@ func (r *ClientRepository) Create(client models.Client) (models.Client, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
 	defer cancel()
 
-	result, err := r.Collection.InsertOne(ctx, client)
-
-	fmt.Println(result)
+	_, err := r.Collection.InsertOne(ctx, client)
 
 	return client, err
+}
+
+func (r *ClientRepository) DeleteClient(id string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Second)
+	defer cancel()
+
+	_, err := r.Collection.DeleteOne(ctx, bson.M{"_id": id})
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	return err
 }

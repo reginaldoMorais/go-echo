@@ -24,7 +24,37 @@ func NewClientController() IClientController {
 	return &ClientControllerImpl{service}
 }
 
+func (cl *ClientControllerImpl) GetClients(c echo.Context) error {
+	printer.Info("Finding all client")
+
+	clientResponses, err := cl.Service.GetClients()
+	if err.Message != "" {
+		return c.JSON(http.StatusNotFound, err)
+	}
+
+	printer.Infof("%d Clients found", len(clientResponses))
+
+	return c.JSON(http.StatusOK, clientResponses)
+}
+
+func (cl *ClientControllerImpl) GetClient(c echo.Context) error {
+	clientId := c.Param("id")
+
+	printer.Infof("Finding client %s", clientId)
+
+	clientResponse, err := cl.Service.GetClientById(clientId)
+	if err.Message != "" {
+		return c.JSON(http.StatusNotFound, err)
+	}
+
+	printer.Infof("Return client %s", clientResponse.ToString())
+
+	return c.JSON(http.StatusOK, clientResponse)
+}
+
 func (cl *ClientControllerImpl) CreateClient(c echo.Context) error {
+	printer.Info("Creating a new client")
+
 	var clientRequest requests.ClientRequest
 
 	// validate the requests body
@@ -52,14 +82,17 @@ func (cl *ClientControllerImpl) CreateClient(c echo.Context) error {
 	return c.JSON(http.StatusOK, clientResponse)
 }
 
-func (cl *ClientControllerImpl) GetClient(c echo.Context) error {
+func (cl *ClientControllerImpl) DeleteClient(c echo.Context) error {
 	clientId := c.Param("id")
-	clientResponse, err := cl.Service.GetClientById(clientId)
+
+	printer.Infof("Delete client %s", clientId)
+
+	err := cl.Service.DeleteClient(clientId)
 	if err.Message != "" {
 		return c.JSON(http.StatusNotFound, err)
 	}
 
-	printer.Infof("Return client %s", clientResponse.ToString())
+	printer.Infof("Client %s deleted", clientId)
 
-	return c.JSON(http.StatusOK, clientResponse)
+	return c.JSON(http.StatusNoContent, "")
 }

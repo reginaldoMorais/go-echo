@@ -9,6 +9,8 @@ import (
 func UserRoute(e *echo.Echo) {
 	controllers := controllers.NewClientController()
 
-	e.POST("/client", controllers.CreateClient)
+	e.GET("/client", controllers.GetClients)
 	e.GET("/client/:id", controllers.GetClient)
+	e.POST("/client", controllers.CreateClient)
+	e.DELETE("/client/:id", controllers.DeleteClient)
 }

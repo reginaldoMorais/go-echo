@@ -6,34 +6,37 @@ import (
 	"time"
 )
 
-func Infof(format string, msg string) {
-	printf(format, "INFO ", color.Info(msg))
+func Infof(format string, msg any) {
+	printf(color.Info(format), "INFO ", msg)
 }
 
-func Info(msg string) {
+func Info(msg any) {
 	print("INFO ", color.Info(msg))
 }
 
-func Warnf(format string, msg string) {
-	printf(format, "WARN ", color.Warn(msg))
+func Warnf(format string, msg any) {
+	printf(color.Warn(format), "WARN ", msg)
 }
 
-func Warn(msg string) {
+func Warn(msg any) {
 	print("WARN ", color.Warn(msg))
 }
 
-func Errorf(format string, msg string) {
-	printf(format, "ERROR", color.Fatal(msg))
+func Errorf(format string, msg ...any) {
+	printf(color.Fatal(format), "ERROR", msg)
 }
 
-func Error(msg string) {
+func Error(msg any) {
 	print("ERROR", color.Fatal(msg))
 }
 
-func printf(format string, level string, msg string) {
+func printf(format string, level string, msg any) {
 	currentTime := time.Now()
+	date := color.Yellow("%d-%d-%d %d:%d:%d:%d")
+	fullFormat := date + " - %s -    " + format + "\n"
+
 	fmt.Printf(
-		color.Yellow("%d-%d-%d %d:%d:%d:%d - %s -  "+color.Info(format)+"\n"),
+		fullFormat,
 		currentTime.Year(),
 		currentTime.Month(),
 		currentTime.Day(),
@@ -45,10 +48,13 @@ func printf(format string, level string, msg string) {
 		msg)
 }
 
-func print(level string, msg string) {
+func print(level string, msg any) {
 	currentTime := time.Now()
+	date := color.Yellow("%d-%d-%d %d:%d:%d:%d")
+	fullFormat := date + " - %s -    %s\n"
+
 	fmt.Printf(
-		color.Yellow("%d-%d-%d %d:%d:%d:%d - %s -  %s\n"),
+		fullFormat,
 		currentTime.Year(),
 		currentTime.Month(),
 		currentTime.Day(),
